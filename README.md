@@ -42,11 +42,30 @@ It includes:
 git clone git@github.com:aamshaegar/NextronJS-app-router.git
 cd NextronJS-app-router
 npm install
-npm run dev      # dev mode on http://localhost:3000: hot reload + DevTools
-npm run build    # production installers in dist/
+npm run dev               # Next.js only, opens http://localhost:3000 in your browser
+npm run dev --desktop     # the desktop app (Electron) in dev mode, with hot reload
+npm run start             # production build served on http://localhost:3000 in the browser
+npm run start --desktop   # the desktop app with the production build (no installers)
+npm run build             # full build plus installers in dist/
 ```
 
 Requirements: Node.js 20 or later.
+
+### Commands
+
+| Command | What it does | URL / window |
+|---|---|---|
+| `npm run dev` | Next.js dev server only, with hot reload, opened in your browser | http://localhost:3000 |
+| `npm run dev --desktop` | Desktop app in dev mode (`nextron`): Electron + Next dev server, DevTools open | Electron window |
+| `npm run start` | Builds the static export and serves it as production, opened in your browser | http://localhost:3000 |
+| `npm run start --desktop` | Builds `app/` (no installers) and runs Electron in production mode | Electron window |
+| `npm run build` | Full build plus installers (AppImage/snap on Linux) | `dist/` |
+
+- All commands run through [`scripts/run.mjs`](scripts/run.mjs). npm passes `--desktop` to it as `npm_config_desktop=true`.
+- `PORT=4000 npm run dev` changes the port. `BROWSER=none npm run dev` doesn't open the browser.
+- In the browser, `window.ipc` doesn't exist, so Electron-only features (such as the IPC button) do nothing there. Check `if (window.ipc)` before using it.
+- `http://localhost:3000/` is the same home page the desktop app opens, and `/splash` shows the splash screen.
+- The VS Code debug task (`.vscode/tasks.json`) runs `npm run dev --desktop` and attaches to the main process on port 9292 and the renderer on port 5858.
 
 ---
 
@@ -63,7 +82,7 @@ An Electron app has two kinds of processes:
 ┌──────────────── main process (Node) ───────────────┐
 │ main/main.js                                       │
 │   ├─ creates splash window → loads /splash         │
-│   ├─ creates main window (hidden) → loads /home    │
+│   ├─ creates main window (hidden) → loads /        │
 │   └─ when ready: shows main, closes splash         │
 └──────────────┬────────────────────────────────────┘
                │ IPC (window.ipc via preload.js)
@@ -96,7 +115,7 @@ An Electron app has two kinds of processes:
 │   │   ├── (main)/             # route group: normal app windows
 │   │   │   ├── layout.jsx      # root layout: nav + ViewTransition
 │   │   │   ├── loading.jsx     # loading fallback (Suspense)
-│   │   │   ├── home/page.jsx   # → /home
+│   │   │   ├── page.jsx        # → / (home)
 │   │   │   └── next/
 │   │   │       ├── page.jsx    # → /next (Server Component)
 │   │   │       └── panels.jsx  # client component (Activity demo)
@@ -253,7 +272,7 @@ export default function Reader() {
 }
 ```
 
-`useIpc` subscribes on mount and unsubscribes on unmount. If your handler reads changing state, wrap it in `useEffectEvent` (see `home/page.jsx`).
+`useIpc` subscribes on mount and unsubscribes on unmount. If your handler reads changing state, wrap it in `useEffectEvent` (see `(main)/page.jsx`).
 
 ### Request/response style (optional)
 
@@ -290,7 +309,7 @@ app ready
   → splash window shown (420×300, frameless, transparent, always on top)
   → main window created with show:false
   → progress(…) updates sent to the splash over 'splash:progress'
-  → main window finishes loading /home
+  → main window finishes loading /
   → wait until at least SPLASH_MIN_MS have passed
   → mainWindow.show(); splash.close()
 ```
@@ -313,7 +332,7 @@ await loadSettings()
 splash.progress(50, 'Opening database…')
 await openDb()
 splash.progress(80, 'Loading interface…')
-await mainWindow.loadURL(routeURL('/home'))
+await mainWindow.loadURL(routeURL('/'))
 ```
 
 > On some Linux window managers, transparency needs a compositor. Without one, the rounded corners show a solid background, and everything else still works.
@@ -346,7 +365,7 @@ The first argument (`'settings'`) is the key under which the window's size and p
 | **React Compiler** | `reactCompiler: true` in `next.config.js` | Automatic memoization. Requires `babel-plugin-react-compiler`, which is installed |
 | **`<ViewTransition>`** | `(main)/layout.jsx` + `globals.css` | Animated page changes using the browser's View Transitions API |
 | **`<Activity>`** | `next/panels.jsx` | Hides UI while keeping its state and DOM |
-| **`useEffectEvent`** | `home/page.jsx` | Effect callbacks that see the latest state without re-subscribing |
+| **`useEffectEvent`** | `(main)/page.jsx` | Effect callbacks that see the latest state without re-subscribing |
 | **Async `params` / `searchParams`** | dynamic routes | `const { id } = await params` |
 | **`metadata` title templates** | `(main)/layout.jsx` | `'%s · My Nextron App'` |
 | **Multiple root layouts** | `(main)` and `(splash)` | Different HTML shells per window |

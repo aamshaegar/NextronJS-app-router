@@ -2,20 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
-      "script": "dev",
+      // Starts the desktop app in dev mode so the debug configs in launch.json can attach
+      // (main process on :9292, renderer on :5858).
+      "label": "dev",
+      "type": "shell",
+      "command": "npm run dev --desktop",
       "isBackground": true,
       "problemMatcher": {
         "owner": "custom",
-        "pattern": {
-          "regexp": ""
-        },
+        "pattern": { "regexp": "" },
         "background": {
-          "beginsPattern": "started server",
+          "beginsPattern": "Desktop dev",
           "endsPattern": "Debugger listening on"
         }
-      },
-      "label": "dev"
+      }
     }
   ]
 }

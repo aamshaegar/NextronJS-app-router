@@ -12,6 +12,9 @@ export default {
   // so you rarely need useMemo / useCallback / React.memo by hand.
   reactCompiler: true,
 
+  // Don't auto-generate AGENTS.md when an AI coding tool runs `next dev`.
+  agentRules: false,
+
   // Next 16: Turbopack is the default bundler for dev AND build (nothing to set).
   // Its filesystem cache makes restarts of `npm run dev` much faster.
 }

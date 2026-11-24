@@ -43,7 +43,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms))
   await wait(400)
   splash.progress(65, 'Preparing workspace…')
 
-  await mainWindow.loadURL(routeURL('/home'))
+  await mainWindow.loadURL(routeURL('/'))
   splash.progress(100, 'Ready')
 
   // 3. Respect the minimum splash time, then swap windows.

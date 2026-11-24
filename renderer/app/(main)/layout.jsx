@@ -21,7 +21,7 @@ export default function MainLayout({ children }) {
       <body>
         <div className={s.shell}>
           <nav className={s.nav}>
-            <Link href="/home">Home</Link>
+            <Link href="/">Home</Link>
             <Link href="/next">Next</Link>
             <ThemeToggle />
           </nav>

@@ -2,8 +2,8 @@
 
 import { useEffect, useEffectEvent, useState } from 'react'
 import Image from 'next/image'
-import s from '../../../styles/app.module.css'
-import { useIpc } from '../../../components/use-ipc'
+import s from '../../styles/app.module.css'
+import { useIpc } from '../../components/use-ipc'
 
 export default function HomePage() {
   const [message, setMessage] = useState('No message found')
@@ -29,7 +29,7 @@ export default function HomePage() {
           className={s.button}
           onClick={() => {
             setCount((c) => c + 1)
-            window.ipc.send('message', 'Hello')
+            window.ipc?.send('message', 'Hello') // window.ipc only exists inside Electron
           }}
         >
           Test IPC

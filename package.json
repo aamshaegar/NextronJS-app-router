@@ -7,8 +7,9 @@
   "type": "module",
   "main": "app/main.js",
   "scripts": {
-    "dev": "nextron --renderer-port 3000",
-    "build": "nextron build",
+    "dev": "node scripts/run.mjs dev",
+    "build": "node scripts/run.mjs build",
+    "start": "node scripts/run.mjs start",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "nextron": "^10.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "serve": "^14.2.8",
     "tailwindcss": "^4.3.5"
   },
   "license": "MIT",
