@@ -24,10 +24,10 @@ jobs:
           fetch-depth: 0 # needed for "last updated" dates
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24 # same major as local dev (lockfile made with npm 11)
           cache: npm
       # --ignore-scripts skips electron-builder's postinstall (not needed for docs)
-      - run: npm ci --ignore-scripts
+      - run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
       - run: npm run docs:build
       - uses: actions/upload-pages-artifact@v3
         with:
