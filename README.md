@@ -7,6 +7,7 @@ It includes:
 - 🚀 **A splash screen**: a frameless, transparent window with a progress bar driven by the main process
 - 🧭 **The App Router** (`renderer/app/`) with route groups and two root layouts
 - ⚛️ **React Compiler**, so you rarely need `useMemo` / `useCallback`
+- 🎨 **Tailwind CSS v4**, ready to use next to CSS Modules
 - ⚡ **Turbopack** (the default in Next 16) for dev and build
 - 🎞 **`<ViewTransition>`** for animated page changes
 - 🗂 **`<Activity>`** for hidden UI that keeps its state
@@ -40,7 +41,7 @@ It includes:
 git clone git@github.com:aamshaegar/NextronJS-app-router.git
 cd NextronJS-app-router
 npm install
-npm run dev      # dev mode: hot reload + DevTools
+npm run dev      # dev mode on http://localhost:3000: hot reload + DevTools
 npm run build    # production installers in dist/
 ```
 
@@ -70,7 +71,7 @@ An Electron app has two kinds of processes:
 └────────────────────────────────────────────────────┘
 ```
 
-- **Dev:** `nextron` starts `next dev` on port 8888 and Electron loads `http://localhost:8888/<route>`.
+- **Dev:** `nextron` starts `next dev` on port **3000** and Electron loads `http://localhost:3000/<route>`. To use another port, change `--renderer-port` in the `dev` script in `package.json`.
 - **Prod:** Next does a **static export** into `app/`, and `electron-serve` serves it as `app://./<route>`.
 
 [`main/helpers/routes.js`](main/helpers/routes.js) hides this difference. Always use `routeURL('/my-page')`.
@@ -355,10 +356,33 @@ Server Actions, Route Handlers (`app/api/...`), `cookies()` / `headers()`, ISR o
 
 ## 11. Styling
 
-- **Global CSS** (`styles/globals.css`) holds CSS variables (`--bg`, `--accent`, …) and resets. Import it only in root layouts.
-- **CSS Modules** (`*.module.css`) are scoped per component: `import s from './x.module.css'`, then `className={s.card}`.
+### Tailwind CSS v4 (preinstalled)
+
+Tailwind is set up through `renderer/postcss.config.mjs`, with `@import "tailwindcss";` at the top of `styles/globals.css`. Use utility classes anywhere:
+
+```jsx
+<h1 className="text-3xl font-bold text-violet-400">Hello</h1>
+<button className="rounded-lg bg-violet-600 px-4 py-2 hover:bg-violet-500">Save</button>
+```
+
+There's no `tailwind.config.js` in v4. Customize the theme in CSS:
+
+```css
+/* styles/globals.css */
+@theme {
+  --color-brand: #7c5cff;
+  --font-display: "Inter", sans-serif;
+}
+/* now usable: bg-brand, text-brand, font-display */
+```
+
+> Tailwind's reset (Preflight) removes default margins and heading sizes, so style elements with classes.
+
+### Other options
+
+- **Global CSS** (`styles/globals.css`) holds CSS variables (`--bg`, `--accent`, …). Import it only in root layouts.
+- **CSS Modules** (`*.module.css`) are scoped per component: `import s from './x.module.css'`, then `className={s.card}`. They can be mixed freely with Tailwind.
 - Static images go in `renderer/public/` and are referenced as `/images/x.png`.
-- Tailwind can be added too: `npm i -D tailwindcss @tailwindcss/postcss`, add `renderer/postcss.config.mjs`, then add `@import "tailwindcss";` to `globals.css`.
 
 ---
 

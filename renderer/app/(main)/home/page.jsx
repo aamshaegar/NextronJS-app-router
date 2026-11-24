@@ -20,7 +20,9 @@ export default function HomePage() {
 
   return (
     <>
-      <h1>⚡ Electron + Next.js 16 ⚡</h1>
+      <h1 className="mb-6 bg-gradient-to-r from-violet-400 to-cyan-300 bg-clip-text text-3xl font-bold text-transparent">
+        ⚡ Electron + Next.js 16 + Tailwind ⚡
+      </h1>
       <Image src="/images/logo.png" alt="Logo" width={128} height={128} />
       <div className={s.card}>
         <button

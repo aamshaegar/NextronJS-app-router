@@ -7,7 +7,7 @@
   "type": "module",
   "main": "app/main.js",
   "scripts": {
-    "dev": "nextron",
+    "dev": "nextron --renderer-port 3000",
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps"
   },
@@ -16,13 +16,15 @@
     "electron-store": "^11.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
     "babel-plugin-react-compiler": "^1.0.0",
     "electron": "^43.3.0",
     "electron-builder": "^26.15.3",
     "next": "^16.3.0",
     "nextron": "^10.3.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.5"
   },
   "license": "MIT",
   "repository": {
