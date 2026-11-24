@@ -26,6 +26,10 @@ const desktop =
   process.argv.includes('--desktop') ||
   ['true', '1', ''].includes(process.env.npm_config_desktop ?? 'unset')
 
+// Privacy: never send Next.js anonymous telemetry, for every command run through this script.
+// (Same effect as `npx next telemetry disable`, but per project instead of per machine.)
+process.env.NEXT_TELEMETRY_DISABLED = '1'
+
 const log = (msg) => console.log(`\x1b[36m[run]\x1b[0m ${msg}`)
 
 // Run a local binary (node_modules/.bin) and resolve when it exits with code 0.
