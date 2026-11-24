@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
 :root {
+  /* Light theme (default) */
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #151821;
+  --muted: #5b6475;
+  --accent: #6d4aff;
+  --accent-2: #0891b2;
+  color-scheme: light;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dark theme: active when <html class="dark"> (set by ThemeToggle) */
+.dark {
   --bg: #0b0d12;
   --panel: #141821;
   --text: #e6e9ef;
@@ -8,8 +21,11 @@
   --accent: #7c5cff;
   --accent-2: #22d3ee;
   color-scheme: dark;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
+
+/* Tailwind v4: make `dark:` utilities follow the .dark class
+   instead of only the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
 
 * { box-sizing: border-box; }
 body { margin: 0; }

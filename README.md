@@ -7,6 +7,7 @@ It includes:
 - 🚀 **A splash screen**: a frameless, transparent window with a progress bar driven by the main process
 - 🧭 **The App Router** (`renderer/app/`) with route groups and two root layouts
 - ⚛️ **React Compiler**, so you rarely need `useMemo` / `useCallback`
+- 🌗 **A dark/light/system theme toggle** (Tailwind `dark:` variant, saved choice, no flash on load)
 - 🎨 **Tailwind CSS v4**, ready to use next to CSS Modules
 - ⚡ **Turbopack** (the default in Next 16) for dev and build
 - 🎞 **`<ViewTransition>`** for animated page changes
@@ -103,7 +104,9 @@ An Electron app has two kinds of processes:
 │   │       ├── layout.jsx      # transparent root layout
 │   │       └── splash/page.jsx # → /splash
 │   ├── components/
-│   │   └── use-ipc.js          # useIpc(channel, handler) hook
+│   │   ├── use-ipc.js          # useIpc(channel, handler) hook
+│   │   ├── theme-toggle.jsx    # dark/light/system toggle button
+│   │   └── theme-script.js     # applies the saved theme before paint
 │   ├── styles/                 # global CSS + CSS Modules
 │   ├── public/                 # static files, served at /
 │   └── next.config.js
@@ -377,6 +380,21 @@ There's no `tailwind.config.js` in v4. Customize the theme in CSS:
 ```
 
 > Tailwind's reset (Preflight) removes default margins and heading sizes, so style elements with classes.
+
+### Dark / light theme
+
+The toggle in the nav ([`components/theme-toggle.jsx`](renderer/components/theme-toggle.jsx)) cycles through **light → dark → system** and saves the choice in `localStorage`.
+
+How it works:
+1. The toggle adds or removes the `dark` class on `<html>`.
+2. `globals.css` redefines the CSS variables (`--bg`, `--text`, …) under `.dark`, so CSS Modules switch automatically.
+3. `@custom-variant dark (&:where(.dark, .dark *));` makes Tailwind's `dark:` utilities follow that class:
+   ```jsx
+   <div className="bg-white text-zinc-900 dark:bg-zinc-900 dark:text-white">…</div>
+   ```
+4. [`components/theme-script.js`](renderer/components/theme-script.js) is inlined in each root layout's `<head>`. It applies the saved theme **before the first paint**, so there's no flash. The splash screen uses it too.
+
+To change the colors, edit the `:root` (light) and `.dark` blocks in `globals.css`.
 
 ### Other options
 

@@ -1,6 +1,6 @@
 .root {
   height: 100vh; display: grid; place-items: center;
-  background: radial-gradient(120% 120% at 0% 0%, #1b1440 0%, #0b0d12 60%);
+  background: radial-gradient(120% 120% at 0% 0%, color-mix(in srgb, var(--accent) 25%, var(--bg)) 0%, var(--bg) 60%);
   color: var(--text); border-radius: 16px; overflow: hidden;
   -webkit-app-region: drag; /* lets the user drag the frameless window */
   user-select: none;
@@ -9,10 +9,10 @@
 .logo { animation: pulse 1.6s ease-in-out infinite; }
 .title { margin: 14px 0 4px; font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
 .label { margin: 0 0 18px; font-size: 12px; color: var(--muted); height: 16px; }
-.track { height: 4px; background: #ffffff14; border-radius: 99px; overflow: hidden; }
+.track { height: 4px; background: color-mix(in srgb, var(--text) 10%, transparent); border-radius: 99px; overflow: hidden; }
 .bar {
   height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2));
   transition: width 350ms ease;
 }
-.version { margin-top: 14px; font-size: 11px; color: #ffffff40; }
+.version { margin-top: 14px; font-size: 11px; color: var(--muted); }
 @keyframes pulse { 50% { transform: scale(1.06); opacity: 0.85; } }
