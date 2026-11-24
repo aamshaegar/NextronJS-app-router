@@ -30,12 +30,15 @@
     "react-dom": "^19.2.8",
     "serve": "^14.2.8",
     "tailwindcss": "^4.3.5",
-    "vitepress": "^1.6.4"
+    "vitepress": "^2.0.0-alpha.21"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aamshaegar/NextronJS-app-router.git"
   },
-  "homepage": "https://aamshaegar.github.io/NextronJS-app-router/"
+  "homepage": "https://aamshaegar.github.io/NextronJS-app-router/",
+  "overrides": {
+    "minimatch@>=7.0.0 <11.0.1": "^11.0.9"
+  }
 }
