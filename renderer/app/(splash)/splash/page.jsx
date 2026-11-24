@@ -15,7 +15,7 @@ export default function SplashPage() {
     <div className={s.root}>
       <div className={s.inner}>
         <Image className={s.logo} src="/images/logo.png" alt="" width={72} height={72} priority />
-        <p className={s.title}>My Nextron App</p>
+        <p className={s.title}>Next.js App Router Electron</p>
         <p className={s.label}>{label}</p>
         <div className={s.track}>
           <div className={s.bar} style={{ width: `${value}%` }} />

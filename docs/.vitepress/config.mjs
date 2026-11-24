@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 const repo = 'https://github.com/aamshaegar/NextronJS-app-router'
 
 export default defineConfig({
-  title: 'Nextron App Router',
+  title: 'Next.js App Router Electron',
   description: 'Electron + Next.js 16 (App Router) desktop starter',
   // GitHub Pages serves the site at /<repo-name>/
   base: '/NextronJS-app-router/',

@@ -15,7 +15,7 @@ export default function HomePage() {
   useIpc('message', onMessage)
 
   useEffect(() => {
-    document.title = 'Home · My Nextron App'
+    document.title = 'Home · Next.js App Router Electron'
   }, [])
 
   return (

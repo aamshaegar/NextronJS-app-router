@@ -1,4 +1,4 @@
-# Nextron App Router Starter
+# nextjs-app-router-electron
 
 A desktop app starter built with **Electron 43 + Next.js 16 (App Router) + React 19.2**, on top of [nextron](https://github.com/saltyshiomix/nextron).
 
@@ -372,7 +372,7 @@ The first argument (`'settings'`) is the key under which the window's size and p
 | **`<Activity>`** | `next/panels.jsx` | Hides UI while keeping its state and DOM |
 | **`useEffectEvent`** | `(main)/page.jsx` | Effect callbacks that see the latest state without re-subscribing |
 | **Async `params` / `searchParams`** | dynamic routes | `const { id } = await params` |
-| **`metadata` title templates** | `(main)/layout.jsx` | `'%s · My Nextron App'` |
+| **`metadata` title templates** | `(main)/layout.jsx` | `'%s · Next.js App Router Electron'` |
 | **Multiple root layouts** | `(main)` and `(splash)` | Different HTML shells per window |
 
 ### Not available here (because of static export)
@@ -469,6 +469,12 @@ Configure the name, app ID, icons and targets in `electron-builder.yml`.
 | The splash never closes | Check that the main window's `loadURL` resolves, and look at the terminal for errors |
 
 ---
+
+## Credits
+
+Based on [nextron](https://github.com/saltyshiomix/nextron) by Yoshihide Shiono (MIT). This is an independent project, not affiliated with nextron, Electron (OpenJS Foundation) or Next.js (Vercel). See [NOTICE](NOTICE).
+
+This project isn't published on npm (`"private": true` in `package.json`). Use it by cloning the repository.
 
 ## License
 

@@ -8,7 +8,7 @@
 | **`<Activity>`** | `next/panels.jsx` | Hides UI while keeping its state and DOM |
 | **`useEffectEvent`** | `(main)/page.jsx` | Effect callbacks that see the latest state without re-subscribing |
 | **Async `params` / `searchParams`** | dynamic routes | `const { id } = await params` |
-| **`metadata` title templates** | `(main)/layout.jsx` | `'%s · My Nextron App'` |
+| **`metadata` title templates** | `(main)/layout.jsx` | `'%s · Next.js App Router Electron'` |
 | **Multiple root layouts** | `(main)` and `(splash)` | Different HTML shells per window |
 
 ### Not available here (because of static export)

@@ -1,5 +1,5 @@
-appId: com.aamshaegar.nextronapprouter
-productName: My Nextron App
+appId: com.aamshaegar.nextjsapprouterelectron
+productName: Next.js App Router Electron
 copyright: Copyright © 2026 aamshaegar
 directories:
   output: dist

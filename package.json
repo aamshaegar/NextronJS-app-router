@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "nextron-app-router",
+  "name": "nextjs-app-router-electron",
   "description": "Electron + Next.js 16 (App Router) desktop starter with splash screen",
   "version": "1.0.0",
   "author": "aamshaegar",

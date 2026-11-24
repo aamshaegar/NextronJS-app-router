@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: Nextron App Router
+  name: Next.js App Router Electron
   text: Desktop apps with Next.js 16
   tagline: Electron 43 + Next.js 16 App Router + React 19.2, with a splash screen, Tailwind and dark mode built in.
   image:

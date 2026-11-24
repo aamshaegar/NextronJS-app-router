@@ -8,7 +8,7 @@ import { ThemeToggle } from '../../components/theme-toggle'
 import { themeScript } from '../../components/theme-script'
 
 export const metadata = {
-  title: { template: '%s · My Nextron App', default: 'My Nextron App' },
+  title: { template: '%s · Next.js App Router Electron', default: 'Next.js App Router Electron' },
 }
 
 export default function MainLayout({ children }) {
