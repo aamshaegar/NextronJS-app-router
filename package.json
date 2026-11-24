@@ -10,7 +10,10 @@
     "dev": "node scripts/run.mjs dev",
     "build": "node scripts/run.mjs build",
     "start": "node scripts/run.mjs start",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "electron-serve": "^3.0.0",
@@ -26,11 +29,13 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "serve": "^14.2.8",
-    "tailwindcss": "^4.3.5"
+    "tailwindcss": "^4.3.5",
+    "vitepress": "^1.6.4"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aamshaegar/NextronJS-app-router.git"
-  }
+  },
+  "homepage": "https://aamshaegar.github.io/NextronJS-app-router/"
 }

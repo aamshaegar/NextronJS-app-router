@@ -2,6 +2,8 @@
 
 A desktop app starter built with **Electron 43 + Next.js 16 (App Router) + React 19.2**, on top of [nextron](https://github.com/saltyshiomix/nextron).
 
+📖 **Full documentation: https://aamshaegar.github.io/NextronJS-app-router/** (source in [`docs/`](docs/), built with VitePress)
+
 It includes:
 
 - 🚀 **A splash screen**: a frameless, transparent window with a progress bar driven by the main process
@@ -60,6 +62,8 @@ Requirements: Node.js 20 or later.
 | `npm run start` | Builds the static export and serves it as production, opened in your browser | http://localhost:3000 |
 | `npm run start --desktop` | Builds `app/` (no installers) and runs Electron in production mode | Electron window |
 | `npm run build` | Full build plus installers (AppImage/snap on Linux) | `dist/` |
+| `npm run docs:dev` | Documentation site with live reload | http://localhost:5173/NextronJS-app-router/ |
+| `npm run docs:build` | Builds the documentation site | `docs/.vitepress/dist/` |
 
 - All commands run through [`scripts/run.mjs`](scripts/run.mjs). npm passes `--desktop` to it as `npm_config_desktop=true`.
 - **Next.js telemetry is disabled.** `scripts/run.mjs` sets `NEXT_TELEMETRY_DISABLED=1` for every command, so no anonymous usage data is sent. If you run `next` directly, outside the npm scripts, also run `npx next telemetry disable` once to switch it off for your machine.

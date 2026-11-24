@@ -6,3 +6,5 @@ renderer/out/
 .DS_Store
 *.log
 .env*
+docs/.vitepress/dist/
+docs/.vitepress/cache/
