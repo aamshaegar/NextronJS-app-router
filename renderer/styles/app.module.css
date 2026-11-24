@@ -1,0 +1,7 @@
+.shell { min-height: 100vh; background: var(--bg); color: var(--text); }
+.nav { display: flex; gap: 16px; padding: 14px 24px; background: var(--panel); border-bottom: 1px solid #ffffff10; }
+.nav a { color: var(--muted); text-decoration: none; }
+.nav a:hover { color: var(--text); }
+.content { padding: 32px 24px; }
+.button { background: var(--accent); color: white; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.card { background: var(--panel); border-radius: 12px; padding: 20px; margin-top: 16px; }

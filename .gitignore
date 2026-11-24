@@ -1,0 +1,8 @@
+node_modules/
+/app/
+/dist/
+renderer/.next/
+renderer/out/
+.DS_Store
+*.log
+.env*

@@ -1,0 +1,14 @@
+appId: com.aamshaegar.nextronapprouter
+productName: My Nextron App
+copyright: Copyright © 2026 aamshaegar
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null
+linux:
+  icon: resources/icon.png
