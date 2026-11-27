@@ -1,6 +1,7 @@
 # Opening new windows
 
 ```js
+import path from 'path'
 import { createWindow } from './helpers/create-window.js'
 import { routeURL } from './helpers/routes.js'
 

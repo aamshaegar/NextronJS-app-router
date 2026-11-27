@@ -30,6 +30,9 @@
 │   ├── public/                 # static files, served at /
 │   └── next.config.js
 │
+├── scripts/
+│   └── run.mjs                 # runs npm commands (dev/start/build, --desktop)
+├── docs/                       # this VitePress documentation site
 ├── resources/                  # app icons for electron-builder
 ├── electron-builder.yml        # packaging config (name, id, icons, targets)
 ├── app/                        # ⚠ build output (generated, git-ignored)

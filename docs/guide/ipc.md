@@ -13,6 +13,7 @@ window.ipc.on(channel, cb)  // → unsubscribe()   main → renderer
 
 ```js
 import fs from 'fs/promises'
+import { ipcMain } from 'electron'
 
 ipcMain.on('file:read', async (event, filePath) => {
   const text = await fs.readFile(filePath, 'utf8')
@@ -25,7 +26,7 @@ ipcMain.on('file:read', async (event, filePath) => {
 ```jsx
 'use client'
 import { useState } from 'react'
-import { useIpc } from '../../../components/use-ipc'
+import { useIpc } from '../../../components/use-ipc' // adjust to your file's depth
 
 export default function Reader() {
   const [text, setText] = useState('')
