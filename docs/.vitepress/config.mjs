@@ -37,6 +37,7 @@ export default defineConfig({
           { text: 'Talking to Electron (IPC)', link: '/guide/ipc' },
           { text: 'The splash screen', link: '/guide/splash-screen' },
           { text: 'Opening new windows', link: '/guide/windows' },
+          { text: 'Menus, tray, updates and signing', link: '/guide/native' },
           { text: 'Styling, Tailwind and themes', link: '/guide/styling' },
           { text: 'Building and packaging', link: '/guide/building' },
           { text: 'Writing these docs', link: '/guide/documentation' },

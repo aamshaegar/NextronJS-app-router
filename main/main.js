@@ -4,6 +4,9 @@ import serve from 'electron-serve'
 import { createWindow } from './helpers/create-window.js'
 import { createSplash } from './helpers/splash.js'
 import { routeURL } from './helpers/routes.js'
+import { createMenu } from './helpers/menu.js'
+import { createTray } from './helpers/tray.js'
+import { initUpdater, installUpdate } from './helpers/updater.js'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -14,6 +17,22 @@ if (isProd) {
   serve({ directory: 'app' })
 } else {
   app.setPath('userData', `${app.getPath('userData')} (development)`)
+}
+
+let mainWindow = null
+const getMainWindow = () => (mainWindow && !mainWindow.isDestroyed() ? mainWindow : null)
+
+const createMainWindow = (options = {}) => {
+  mainWindow = createWindow('main', {
+    width: 1000,
+    height: 600,
+    ...options,
+    webPreferences: {
+      preload: path.join(import.meta.dirname, 'preload.js'),
+    },
+  })
+  mainWindow.on('closed', () => (mainWindow = null))
+  return mainWindow
 }
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -27,14 +46,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms))
   splash.progress(10, 'Starting…')
 
   // 2. Main window is created hidden and loads in the background.
-  const mainWindow = createWindow('main', {
-    width: 1000,
-    height: 600,
-    show: false,
-    webPreferences: {
-      preload: path.join(import.meta.dirname, 'preload.js'),
-    },
-  })
+  createMainWindow({ show: false })
+  createMenu()
+  createTray(getMainWindow)
 
   splash.progress(35, 'Loading interface…')
 
@@ -53,11 +67,24 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms))
   mainWindow.show()
   if (!splash.window.isDestroyed()) splash.window.close()
   if (!isProd) mainWindow.webContents.openDevTools()
+
+  initUpdater(getMainWindow)
 })()
 
+// macOS apps stay running with no windows open; other platforms quit.
 app.on('window-all-closed', () => {
-  app.quit()
+  if (process.platform !== 'darwin') app.quit()
 })
+
+// macOS: clicking the dock icon with no windows open re-creates one.
+app.on('activate', async () => {
+  if (!getMainWindow() && app.isReady()) {
+    await createMainWindow().loadURL(routeURL('/'))
+  }
+})
+
+ipcMain.handle('app:version', () => app.getVersion())
+ipcMain.on('updater:install', () => installUpdate())
 
 ipcMain.on('message', async (event, arg) => {
   event.reply('message', `${arg} World!`)

@@ -4,6 +4,7 @@ The renderer **cannot** use Node or Electron directly (`contextIsolation: true`)
 
 ```js
 window.ipc.send(channel, value)          // renderer → main
+window.ipc.invoke(channel, ...args)      // renderer → main → Promise
 window.ipc.on(channel, cb)  // → unsubscribe()   main → renderer
 ```
 
@@ -43,16 +44,12 @@ export default function Reader() {
 
 `useIpc` subscribes on mount and unsubscribes on unmount. If your handler reads changing state, wrap it in `useEffectEvent` (see `(main)/page.jsx`).
 
-### Request/response style (optional)
+### Request/response style
 
-To use `await`, add an `invoke` to `preload.js`:
-
-```js
-invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
-```
+`window.ipc.invoke` returns a Promise with the value from `ipcMain.handle`:
 
 ```js
-// main
+// main (already included)
 ipcMain.handle('app:version', () => app.getVersion())
 // renderer
 const v = await window.ipc.invoke('app:version')

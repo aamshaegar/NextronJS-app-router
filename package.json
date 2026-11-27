@@ -6,6 +6,7 @@
   "author": "aamshaegar",
   "type": "module",
   "main": "app/main.js",
+  "desktopName": "nextjs-app-router-electron.desktop",
   "scripts": {
     "dev": "node scripts/run.mjs dev",
     "build": "node scripts/run.mjs build",
@@ -17,7 +18,8 @@
   },
   "dependencies": {
     "electron-serve": "^3.0.0",
-    "electron-store": "^11.0.2"
+    "electron-store": "^11.0.2",
+    "electron-updater": "^6.8.11"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",

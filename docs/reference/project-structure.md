@@ -8,7 +8,10 @@
 │   └── helpers/
 │       ├── create-window.js    # BrowserWindow that remembers size/position
 │       ├── splash.js           # splash window + progress()
-│       └── routes.js           # routeURL(): dev/prod URL resolver
+│       ├── routes.js           # routeURL(): dev/prod URL resolver
+│       ├── menu.js             # application menu
+│       ├── tray.js             # tray icon + menu
+│       └── updater.js          # auto-updates (electron-updater)
 │
 ├── renderer/                   # Next.js 16 app (App Router)
 │   ├── app/
@@ -27,7 +30,7 @@
 │   │   ├── theme-toggle.jsx    # dark/light/system toggle button
 │   │   └── theme-script.js     # applies the saved theme before paint
 │   ├── styles/                 # global CSS + CSS Modules
-│   ├── public/                 # static files, served at /
+│   ├── public/                 # static files, served at / (incl. tray.png)
 │   └── next.config.js
 │
 ├── scripts/

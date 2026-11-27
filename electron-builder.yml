@@ -9,6 +9,24 @@ files:
     filter:
       - package.json
       - app
-publish: null
+# Where electron-updater looks for new versions (GitHub Releases of this repo).
+# Publish with: GH_TOKEN=<token> npx nextron build --publish always
+publish:
+  provider: github
+  owner: aamshaegar
+  repo: NextronJS-app-router
 linux:
   icon: resources/icon.png
+  syncDesktopName: true
+
+# Code signing reads certificates from environment variables, never from this file:
+#   Windows + macOS: CSC_LINK (path/base64 of .p12/.pfx), CSC_KEY_PASSWORD
+#   macOS notarization: APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID
+# Without them, builds are produced unsigned.
+mac:
+  icon: resources/icon.icns
+  category: public.app-category.developer-tools
+  hardenedRuntime: true
+  notarize: true
+win:
+  icon: resources/icon.ico
